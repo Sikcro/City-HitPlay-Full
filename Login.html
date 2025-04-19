@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HitPlay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+        body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .bg-primary {
+      background-color: #2b3036;
+    }
+    .text-primary-foreground {
+      color: white;
+    }
+    .text-muted-foreground {
+      color: #febd59;
+    }
+    .bg-white\/20 {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .focus-visible\:ring-2:focus-visible {
+      outline: 2px solid #febd59;
+      outline-offset: 2px;
+    }
+    h1 {color: azure;
+    }
+    label {color: #ffffff;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen w-full flex flex-col md:flex-row items-stretch">
+    <!-- Left side - Branding/Product showcase -->
+    <div class="relative hidden md:flex md:w-2/5 bg-primary text-primary-foreground flex-col justify-between p-12">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-[30%] -left-[30%] w-[100%] h-[100%] rounded-full bg-blue-400/30 blur-3xl"></div>
+        <div class="absolute -bottom-[30%] -right-[30%] w-[100%] h-[100%] rounded-full bg-blue-600/20 blur-3xl"></div>
+      </div>
+      
+      <div class="relative z-10 flex flex-col h-full">
+        <div class="mb-auto">
+          <h1 class="text-2xl font-bold">HitPlay</h1>
+        </div>
+        
+        <div class="space-y-6">
+          <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+            Your ultimate video streaming experience
+          </h2>
+          <p class="text-lg text-primary-foreground/80">
+            Join thousands of creators and viewers sharing amazing content on our platform.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side - Auth forms -->
+    <div class="flex-1 flex items-center justify-center p-6 md:p-12">
+      <div class="w-full max-w-md">
+        <!-- Login Form -->
+        <div class="animate-fade-in" id="loginForm">
+          <div class="mb-8 text-center">
+            <h1 class="text-3xl font-semibold tracking-tight mb-2">Welcome to HitPlay</h1>
+            <p class="text-muted-foreground">Sign in to start watching and sharing videos</p>
+          </div>
+          
+          <form class="space-y-6" onsubmit="return false;">
+            <div class="space-y-2">
+              <label for="email" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+              <div class="relative">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <input id="email" type="email" placeholder="name@example.com" class="pl-10 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" required>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <label for="password" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
+                <button type="button" class="text-xs text-violet-600 hover:underline font-normal">Forgot password?</button>
+              </div>
+              <div class="relative">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <input id="password" type="password" class="pl-10 pr-10 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" placeholder="••••••••" required>
+                <button type="button" class="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-gray-700" onclick="togglePassword()">
+                  <svg id="showPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg id="hidePassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off hidden"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                </button>
+              </div>
+            </div>
+            
+            <button type="submit" class="w-full font-medium rounded-md bg-violet-600 text-white h-10 px-4 py-2 hover:bg-violet-700 transition-colors" onclick="simulateLogin()">
+              Sign in to HitPlay
+            </button>
+          </form>
+          
+          <div class="mt-8 text-center text-sm">
+            <span class="text-muted-foreground">Don't have an account?</span>
+            <button class="p-0 h-auto font-normal text-violet-600 hover:underline ml-1" onclick="switchForm('register')">
+              Create a creator account
+            </button>
+          </div>
+        </div>
+
+        <!-- Register Form (hidden by default) -->
+        <div class="animate-fade-in hidden" id="registerForm">
+          <div class="mb-8 text-center">
+            <h1 class="text-3xl font-semibold tracking-tight mb-2">Join HitPlay</h1>
+            <p class="text-muted-foreground">Create your account to upload and share videos</p>
+          </div>
+          
+          <form class="space-y-5" onsubmit="return false;">
+            <div class="space-y-2">
+              <label for="name" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Channel name</label>
+              <div class="relative">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <input id="name" type="text" placeholder="Your channel name" class="pl-10 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" required>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="registerEmail" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+              <div class="relative">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <input id="registerEmail" type="email" placeholder="name@example.com" class="pl-10 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" required>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="newPassword" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
+              <div class="relative">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <input id="newPassword" type="password" class="pl-10 pr-10 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" placeholder="••••••••" required>
+                <button type="button" class="absolute right-0 top-0 h-full px-3 text-muted-foreground hover:text-gray-700" onclick="toggleRegisterPassword()">
+                  <svg id="showRegisterPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg id="hideRegisterPassword" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off hidden"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                </button>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="confirmPassword" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Confirm password</label>
+              <div class="relative">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <input id="confirmPassword" type="password" class="pl-10 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" placeholder="••••••••" required>
+              </div>
+            </div>
+            
+            <button type="submit" class="w-full font-medium rounded-md bg-violet-600 text-white h-10 px-4 py-2 hover:bg-violet-700 transition-colors" onclick="simulateRegister()">
+              Create HitPlay account
+            </button>
+          </form>
+          
+          <div class="mt-8 text-center text-sm">
+            <span class="text-muted-foreground">Already have an account?</span>
+            <button class="p-0 h-auto font-normal text-violet-600 hover:underline ml-1" onclick="switchForm('login')">
+              Sign in to your channel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const showPasswordIcon = document.getElementById('showPassword');
+      const hidePasswordIcon = document.getElementById('hidePassword');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        showPasswordIcon.classList.add('hidden');
+        hidePasswordIcon.classList.remove('hidden');
+      } else {
+        passwordInput.type = 'password';
+        showPasswordIcon.classList.remove('hidden');
+        hidePasswordIcon.classList.add('hidden');
+      }
+    }
+    
+    // Toggle register password visibility
+    function toggleRegisterPassword() {
+      const passwordInput = document.getElementById('newPassword');
+      const showPasswordIcon = document.getElementById('showRegisterPassword');
+      const hidePasswordIcon = document.getElementById('hideRegisterPassword');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        showPasswordIcon.classList.add('hidden');
+        hidePasswordIcon.classList.remove('hidden');
+      } else {
+        passwordInput.type = 'password';
+        showPasswordIcon.classList.remove('hidden');
+        hidePasswordIcon.classList.add('hidden');
+      }
+    }
+    
+    // Switch between login and register forms
+    function switchForm(formType) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      
+      if (formType === 'login') {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+      } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+      }
+    }
+    
+    // Simulate login
+    function simulateLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if (!email || !password) {
+        alert('Please enter both email and password');
+        return;
+      }
+      
+      // Show loading state
+      const loginButton = document.querySelector('#loginForm button[type="submit"]');
+      const originalText = loginButton.textContent;
+      loginButton.textContent = 'Signing in...';
+      loginButton.disabled = true;
+      
+      // Simulate API call with timeout
+      setTimeout(() => {
+        alert('Login successful!');
+        loginButton.textContent = originalText;
+        loginButton.disabled = false;
+        window.location.href = '../main.html';
+      }, 1500);
+    }
+    
+    // Simulate register
+    function simulateRegister() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (!name || !email || !password || !confirmPassword) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('Passwords don\'t match');
+        return;
+      }
+      
+      // Show loading state
+      const registerButton = document.querySelector('#registerForm button[type="submit"]');
+      const originalText = registerButton.textContent;
+      registerButton.textContent = 'Creating account...';
+      registerButton.disabled = true;
+      
+      // Simulate API call with timeout
+      setTimeout(() => {
+        alert('Account created successfully!');
+        registerButton.textContent = originalText;
+        registerButton.disabled = false;
+        switchForm('login');
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

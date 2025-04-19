@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="Icons/SmallLogoNoBackground.png" alt="Logo"></div>
+        <input type="text" class="search-bar" id="search-bar" placeholder="Search">
+        <div class="top-right">
+            <button class="create-btn">Create</button>
+            <a href="UserProfile/profile.html" class="profile-icon">👤</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <nav class="sidebar">
+            <button class="sidebar-btn">Home</button>
+            <button class="sidebar-btn">Subscriptions</button>
+            <button class="sidebar-btn">Settings</button>
+            <button id="SearchHBtn" class="sidebar-btn">Search History</button>
+        </nav>
+        
+        <main class="content">
+            <div class="video-grid" id="video-list">
+                <!-- Video thumbnails will be added here dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const videoFolder = "videos/";
+        const thumbnailFolder = "thumbnails/";
+        const videoList = ["game.mp4", "video2.mp4", "video3.mp4","Cats.mp4","Cats.mp4","video2.mp4","game.mp4","video3.mp4"];
+        const videoGrid = document.getElementById("video-list");
+        const searchBar = document.getElementById("search-bar");
+
+        function displayVideos(videos) {
+            videoGrid.innerHTML = "";
+            videos.forEach(video => {
+                let videoName = video.split(".")[0];
+                let videoElement = document.createElement("div");
+                videoElement.classList.add("video-item");
+                videoElement.innerHTML = `
+                    <a href="video.html?video=${video}" onclick="saveToHistory('${videoName}')">
+                        <img src="${thumbnailFolder}${videoName}T.png" alt="Thumbnail" class="video-thumbnail">
+                    </a>
+                    <p id="mainV-title">${video}</p>
+                `;
+                videoGrid.appendChild(videoElement);
+            });
+        }
+
+        function filterVideos(query) {
+            query = query.toLowerCase();
+            let rankedVideos = videoList.map(video => {
+                let videoName = video.split(".")[0].toLowerCase();
+                let matchScore = videoName.includes(query) ? 1 : 0;
+                if (matchScore === 0) {
+                    matchScore = getSimilarity(videoName, query);
+                }
+                return { video, matchScore };
+            }).filter(v => v.matchScore > 0)
+              .sort((a, b) => b.matchScore - a.matchScore);
+
+            return rankedVideos.map(v => v.video);
+        }
+
+        function saveToHistory(videoName) {
+            let history = JSON.parse(localStorage.getItem("watchHistory")) || [];
+            if (!history.includes(videoName)) {
+                history.unshift(videoName);
+                if (history.length > 20) history.pop(); // limit to 20 items
+                localStorage.setItem("watchHistory", JSON.stringify(history));
+            }
+        }
+
+
+        function getSimilarity(str1, str2) {
+            let commonChars = str1.split('').filter(char => str2.includes(char)).length;
+            return commonChars / Math.max(str1.length, str2.length);
+        }
+
+        searchBar.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                let query = searchBar.value.trim();
+                if (query) {
+                    let filteredVideos = filterVideos(query);
+                    displayVideos(filteredVideos);
+                }
+            }
+        });
+        
+        displayVideos(videoList);
+    </script>
+    <script>
+        document.getElementById("SearchHBtn").addEventListener("click", function () {
+          window.location.href = "SearchH.html";
+        });
+    </script>
+</body>
+</html>

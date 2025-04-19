@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="Icons/SmallLogoNoBackground.png" alt="Logo"></div>
+        <input type="text" class="search-bar" placeholder="Search">
+        <div class="top-right">
+            <button class="create-btn">Create</button>
+            <div class="profile-icon">👤</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="video-content">
+            <div class="video-player">
+                <video id="video" controls></video>
+                <h2 id="video-title"></h2>
+                <p id="video-description">Description of the video...</p>
+            </div>
+            <aside class="comments-section">
+                <h3>Comments</h3>
+                <div id="comments">
+                    <p>No comments yet.</p>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        // Get video from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoName = urlParams.get('video');
+        
+        if (videoName) {
+            document.getElementById("video").src = `videos/${videoName}`;
+            document.getElementById("video-title").textContent = videoName;
+        }
+    </script>
+</body>
+</html>
