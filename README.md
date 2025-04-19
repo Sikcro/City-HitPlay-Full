@@ -1,3 +1,1 @@
-"# City-HitPlay" 
-"# City-HitPlay" 
-"# City-HitPlay" 
+"Hi! this is the read Me"
