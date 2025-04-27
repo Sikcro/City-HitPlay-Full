@@ -1,51 +1,29 @@
-<!--<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=divice-width, initial-scale=1.0">
-    <title>profile page</title>
-    <link rel="stylesheet" href="profile.css">
-    
-</head>
-<body>
-    <div class="container">
-        <div class="profile-box">
-
-            <img src="images/menu.svg" class="menu-icon">
-
-            <img src="images/settings.svg" class="settings-icon">
-
-            <img src="images/p.svg" class="profile-pic">
-   
-            <h3>username</h3>
-                <p>bio</p>              
-                <button><a href="details.html"> account details</a></button>
-            
-             
-        </div>
-        </div>
-        </div>
-    </div>
-</body>
-</html>-->
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HitPlay Profile Page</title>
     <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="navbar">
-            <img src="images/menu.svg" class="menu-icon" alt="Menu">
-            <h1>HitPlay</h1>
-            <img src="images/settings.svg" class="settings-icon" alt="Settings">
+            <a href="../index.html" class="logo-link">
+                <img src="images/logo.png" class="logo" alt="HitPlay Logo">
+            </a>
+            <div class="dropdown">
+                <img src="images/menu.svg" class="menu-icon" alt="Menu" id="dropdownMenu">
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="details.html"><i class="fas fa-user-cog"></i> Account Details</a>
+                    <a href="#"><i class="fas fa-history"></i> Search History</a>
+                    <a href="#"><i class="fas fa-bookmark"></i> Saved Videos</a>
+                </div>
+            </div>
         </div>
         <div class="profile-box">
-            <img src="images/p.svg" class="profile-pic" alt="Profile Picture">
+            <img src="" class="profile-pic" id="profilePicDisplay" alt="Profile Picture">
             <h3 id="usernameDisplay">Username</h3>
             <p id="bioDisplay" class="bio">This is a short bio about the user.</p>
             <div class="actions">

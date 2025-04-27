@@ -1,89 +1,75 @@
-<!---
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Details</title>
     <link rel="stylesheet" href="details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="profile-box">
             <h2>Your Account Details</h2>
             <form id="detailsForm">
-                <div class="input-group">
-                    <label for="fname">First Name:</label>
-                    <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
-                </div>
-                <div class="input-group">
-                    <label for="lname">Last Name:</label>
-                    <input type="text" id="lname" name="lname" placeholder="Enter your last name" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-                <div class="input-group">
-                    <label for="bio">Bio:</label>
-                    <textarea id="bio" name="bio" placeholder="Tell us about yourself" required></textarea>
-                </div>
-                <div class="input-group">
-                    <label for="profilePic">Profile Picture:</label>
-                    <input type="file" id="profilePic" name="profilePic" accept="image/*">
-                </div>
-                <button type="submit">Save Details</button>
-            </form>
-        </div>
-    </div>
-    <script src="details.js"></script>
-</body>
-</html>
--->
+                <div class="form-grid">
+                    <div class="form-column">
 
+                        <!-- the fas fa ... links calls the icon from the link-->
+                        <div class="input-group">
+                            <label for="fname"><i class="fas fa-user"></i> First Name:</label>
+                            <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="lname"><i class="fas fa-user"></i> Last Name:</label>
+                            <input type="text" id="lname" name="lname" placeholder="Enter your last name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="username"><i class="fas fa-at"></i> Username:</label>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-column">
+                        <div class="input-group">
+                            <label for="bio"><i class="fas fa-info-circle"></i> Bio:</label>
+                            <textarea id="bio" name="bio" placeholder="Tell us about yourself" required></textarea>
+                            <span class="bio-counter"><span id="charCount">0</span>/200</span>
+                        </div>
+                        
+                        <div class="profile-pic-upload">
+                            <div class="file-upload-btn">
+                                <label for="profilePic" class="file-upload-label">
+                                    <i class="fas fa-camera"></i> Choose Profile Picture
+                                </label>
+                                <input type="file" id="profilePic" name="profilePic" accept="image/*">
+                            </div>
+                            <div class="file-upload-filename" id="uploadFilename">No file chosen</div>
+                            <div class="profile-pic-preview" id="profilePicPreview"></div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="currentPassword"><i class="fas fa-lock"></i> Current Password:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password">
+                        </div>
+                        <div class="input-group">
+                            <label for="newPassword"><i class="fas fa-key"></i> New Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password">
+                        </div>
+                        <div class="input-group">
+                            <label for="confirmPassword"><i class="fas fa-key"></i> Confirm Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password">
+                        </div>
+                    </div>
+                </div>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Details</title>
-    <link rel="stylesheet" href="details.css">
-</head>
-<body>
-    <div class="container">
-        <div class="profile-box">
-            <h2>Your Account Details</h2>
-            <form id="detailsForm">
-                <div class="input-group">
-                    <label for="fname">First Name:</label>
-                    <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
-                </div>
-                <div class="input-group">
-                    <label for="lname">Last Name:</label>
-                    <input type="text" id="lname" name="lname" placeholder="Enter your last name" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="input-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-                <div class="input-group">
-                    <label for="bio">Bio:</label>
-                    <textarea id="bio" name="bio" placeholder="Tell us about yourself" required></textarea>
-                </div>
-                <div class="input-group">
-                    <label for="profilePic">Profile Picture:</label>
-                    <input type="file" id="profilePic" name="profilePic" accept="image/*">
-                </div>
                 <div class="button-group">
-                    <button type="submit">Save Details</button>
-                    <button type="button" id="clearDetails">Clear Details</button>
+                    <button type="submit"><i class="fas fa-save"></i> Save Details</button>
+                    <button type="button" id="resetPassword"><i class="fas fa-sync-alt"></i> Reset Password</button>
+                    <button type="button" id="clearDetails"><i class="fas fa-trash-alt"></i> Clear Details</button>
                 </div>
             </form>
         </div>
