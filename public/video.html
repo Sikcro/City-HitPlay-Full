@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html"><img src="Icons/SmallLogoNoBackground.png" alt="Logo"></a></div>
+        <input type="text" class="search-bar" placeholder="Search">
+        <div class="top-right">
+            <button class="create-btn">Create</button>
+            <a href="UserProfile/profile.html" class="profile-icon"><img src="Icons/UserProfile-removebg-preview.png"></a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <main class="video-content">
+            <div class="video-player">
+                <video id="video" controls></video>
+                <h2 id="video-title"></h2>
+                <p id="video-description">Description of the video...</p>
+            </div>
+            <aside class="comments-section">
+                <h3>Comments</h3>
+                <div class="comment-input">
+                    <textarea id="commentText" placeholder="Add a comment..." rows="3" style="width: 100%; padding: 10px; border-radius: 6px; resize: none;"></textarea>
+                    <button id="submitComment" class="create-btn" style="margin-top: 10px;">Post Comment</button>
+                </div>
+                <div id="comments" style="margin-top: 20px;"></div>
+
+            </aside>
+        </main>
+    </div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoName = urlParams.get('video');
+
+    const commentsContainer = document.getElementById("comments");
+    const commentInput = document.getElementById("commentText");
+    const submitBtn = document.getElementById("submitComment");
+
+    function getStoredComments(video) {
+        return JSON.parse(localStorage.getItem("comments_" + video)) || [];
+    }
+
+    function saveComment(video, comment) {
+        const comments = getStoredComments(video);
+        comments.unshift(comment); // newest on top
+        localStorage.setItem("comments_" + video, JSON.stringify(comments));
+    }
+
+    function renderComments(video) {
+        const comments = getStoredComments(video);
+        commentsContainer.innerHTML = "";
+
+        if (comments.length === 0) {
+            commentsContainer.innerHTML = "<p style='color: #333;'>No comments yet.</p>";
+            return;
+        }
+
+        comments.forEach(comment => {
+            const div = document.createElement("div");
+            div.style.borderBottom = "1px solid #ccc";
+            div.style.padding = "10px 0";
+
+            const username = document.createElement("strong");
+            username.style.display = "block";
+            username.style.color = "#F9B233";
+            username.textContent = comment.user;
+
+            const text = document.createElement("p");
+            text.className = "comment-text";
+            text.textContent = comment.text;
+
+            div.appendChild(username);
+            div.appendChild(text);
+            commentsContainer.appendChild(div);
+        });
+    }
+
+    if (videoName) {
+        document.getElementById("video").src = `videos/${videoName}`;
+        document.getElementById("video-title").textContent = videoName;
+        renderComments(videoName);
+
+        submitBtn.addEventListener("click", () => {
+            const text = commentInput.value.trim();
+            if (text) {
+                const user = "You"; 
+                saveComment(videoName, { user, text });
+                commentInput.value = "";
+                renderComments(videoName);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

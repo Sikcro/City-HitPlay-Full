@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HitPlay Profile Page</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="../index.html" class="logo-link">
+                <img src="images/logo.png" class="logo" alt="HitPlay Logo">
+            </a>
+            <div class="dropdown">
+                <img src="images/menu.svg" class="menu-icon" alt="Menu" id="dropdownMenu">
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                    <a href="details.html"><i class="fas fa-user-cog"></i> Account Details</a>
+                    <a href="#"><i class="fas fa-history"></i> Search History</a>
+                    <a href="#"><i class="fas fa-bookmark"></i> Saved Videos</a>
+                </div>
+            </div>
+        </div>
+        <div class="profile-box">
+            <img src="" class="profile-pic" id="profilePicDisplay" alt="Profile Picture">
+            <h3 id="usernameDisplay">Username</h3>
+            <p id="bioDisplay" class="bio">This is a short bio about the user.</p>
+            <div class="actions">
+                <button class="follow-btn">Follow</button>
+                <button class="details-btn"><a href="details.html">Edit Account Details</a></button>
+            </div>
+        </div>
+    </div>
+    <script src="profilepage.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const email = localStorage.getItem('userEmail');
+            if (email) {
+                const usernameDisplay = document.getElementById('usernameDisplay');
+                usernameDisplay.textContent = email.split('@')[0]; // Show the part before @
+            }
+            
+            const profilePic = document.getElementById('profilePicDisplay');
+            if (profilePic) {
+                profilePic.src = 'images/default-profile.png'; // Set a default profile pic if needed
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
+

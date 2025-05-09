@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | HitPlay</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="index.html"><img src="Icons/SmallLogoNoBackground.png" alt="Logo"></a></div>
+        <input type="text" class="search-bar" placeholder="Search" disabled>
+        <div class="top-right">
+            <a href="create.html"><button class="create-btn">Create</button></a>
+            <a href="UserProfile/profile.html" class="profile-icon"><img src="Icons/UserProfile-removebg-preview.png" alt="User"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <button class="sidebar-btn" onclick="location.href='index.html'">Home</button>
+            <button class="sidebar-btn" onclick="location.href='Subscriptions.html'">Subscriptions</button>
+            <button class="sidebar-btn" onclick="location.href='settings.html'">Settings</button>
+            <button class="sidebar-btn" onclick="location.href='SearchH.html'">Search History</button>
+        </nav>
+
+        <main class="content">
+            <h1 style="color: white;">Settings</h1>
+            <form id="settingsForm" style="background: white; padding: 20px; border-radius: 8px; max-width: 600px;">
+                <label for="theme">Theme:</label><br>
+                <select id="theme" name="theme" style="padding: 10px; width: 100%; margin-bottom: 15px;">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                </select>
+
+                <label for="notifications">Notifications:</label><br>
+                <select id="notifications" name="notifications" style="padding: 10px; width: 100%; margin-bottom: 15px;">
+                    <option value="enabled">Enabled</option>
+                    <option value="disabled">Disabled</option>
+                </select>
+
+                <label for="language">Language:</label><br>
+                <select id="language" name="language" style="padding: 10px; width: 100%; margin-bottom: 15px;">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                </select>
+
+                <button type="submit" class="create-btn">Save Settings</button>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        // Save settings to localStorage
+        document.getElementById("settingsForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const settings = {
+                theme: document.getElementById("theme").value,
+                notifications: document.getElementById("notifications").value,
+                language: document.getElementById("language").value
+            };
+            localStorage.setItem("userSettings", JSON.stringify(settings));
+            alert("Settings saved!");
+        });
+
+        // Load saved settings
+        window.onload = function() {
+            const saved = JSON.parse(localStorage.getItem("userSettings"));
+            if (saved) {
+                document.getElementById("theme").value = saved.theme;
+                document.getElementById("notifications").value = saved.notifications;
+                document.getElementById("language").value = saved.language;
+            }
+        };
+    </script>
+</body>
+</html>

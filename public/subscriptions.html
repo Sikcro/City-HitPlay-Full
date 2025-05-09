@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscriptions | HitPlay</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><a href="index.html"><img src="Icons/SmallLogoNoBackground.png" alt="Logo"></a></div>
+    <input type="text" class="search-bar" placeholder="Search" disabled />
+    <div class="top-right">
+      <a href="create.html"><button class="create-btn">Create</button></a>
+      <a href="UserProfile/profile.html" class="profile-icon"><img src="Icons/UserProfile-removebg-preview.png" alt="User" /></a>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar">
+      <button class="sidebar-btn" onclick="location.href='index.html'">Home</button>
+      <button class="sidebar-btn" onclick="location.href='subscriptions.html'">Subscriptions</button>
+      <button class="sidebar-btn" onclick="location.href='settings.html'">Settings</button>
+      <button class="sidebar-btn" onclick="location.href='SearchH.html'">Search History</button>
+    </nav>
+
+    <main class="content">
+      <h1 style="color: white;">Your Subscriptions</h1>
+      <div id="channelList" style="display: flex; flex-wrap: wrap; gap: 20px;"></div>
+    </main>
+  </div>
+
+  <script>
+    const dummyChannels = [
+      { name: "DanTDM", bio: "Retro gaming enthusiast", img: "Icons/UserProfile.png" },
+      { name: "Mosh", bio: "Frontend developer sharing tutorials", img: "Icons/UserProfile.png" },
+      { name: "CaseyNeistat", bio: "Lifestyle, Travel, and productivity", img: "Icons/UserProfile.png" },
+      { name: "GymShark", bio: "Fitness and workout content", img: "Icons/UserProfile.png" }
+    ];
+
+    const channelList = document.getElementById("channelList");
+
+    dummyChannels.forEach(channel => {
+      const card = document.createElement("div");
+      card.style.background = "#2b3036";
+      card.style.borderRadius = "8px";
+      card.style.padding = "15px";
+      card.style.width = "250px";
+      card.style.color = "white";
+      card.style.boxShadow = "0 2px 5px rgba(0,0,0,0.2)";
+      card.innerHTML = `
+        <img src="${channel.img}" alt="Profile" style="width:100px;height:100px;border-radius:50%;object-fit:cover;">
+        <h2 style="margin-top: 10px;">${channel.name}</h2>
+        <p style="color: #ccc;">${channel.bio}</p>
+        <button style="margin-top: 10px; background-color: #febd59; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px;">
+          View Channel
+        </button>
+      `;
+      channelList.appendChild(card);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Video - HitPlay</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="Icons/SmallLogoNoBackground.png" alt="Logo" /></div>
+    <input type="text" class="search-bar" placeholder="Search" disabled />
+    <div class="top-right">
+      <a href="index.html" class="create-btn">Back</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <h1 style="color: white;">Upload a Video</h1>
+    <form action="http://localhost:3000/upload" method="POST" enctype="multipart/form-data" style="background: white; padding: 20px; border-radius: 8px;">
+      <label for="video">Select Video File:</label><br>
+      <input type="file" name="video" accept="video/mp4" required><br><br>
+
+      <label for="thumbnail">Select Thumbnail Image:</label><br>
+      <input type="file" name="thumbnail" accept="image/png,image/jpeg" required><br><br>
+
+      <button type="submit" class="create-btn">Upload</button>
+    </form>
+  </main>
+</body>
+</html>
