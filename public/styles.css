@@ -198,6 +198,79 @@ header {
     display: none; /* Hide by default */
 }
 
+
+
+
+.share-toggle {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.share-toggle i {
+  margin-right: 8px;
+}
+
+.share-toggle:hover {
+  background-color: #0056b3;
+}
+
+.share-buttons {
+  display: none;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.share-buttons.active {
+  display: flex;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.share-button i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Platform-specific styles */
+.facebook { background: #3b5998; }
+.twitter { background: #1da1f2; }
+.linkedin { background: #0077b5; }
+.whatsapp { background: #25D366; }
+.email { background: #6c757d; }
+.copylink { background: #343a40; }
+
+.share-button:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 768px) {
     /* Header fixes */
     header {

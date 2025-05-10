@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Page</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <header>
@@ -22,6 +24,12 @@
                 <video id="video" controls></video>
                 <h2 id="video-title"></h2>
                 <p id="video-description">Description of the video...</p>
+                
+                <div class="share-container" style="margin-top: 10px;">
+                <button class="share-toggle" id="shareToggle" onclick="window.open('sharebutton/index.html', '_blank')">
+                    <i class="fa-solid fa-share-nodes"></i> Share
+                </button>
+                </div>
             </div>
             <aside class="comments-section">
                 <h3>Comments</h3>
